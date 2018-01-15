@@ -123,6 +123,22 @@ class MinMaxPropertiesTest extends BaseTestCase
                   }
                 }'
             ),
+            // Test that schema with min/maxProperties does not trigger PHP warning get_object_vars()
+            // expects parameter 1 to be object, array given in Constraints/TypeCheck/StrictTypeCheck.php
+            // when an array is given as input
+            array(
+                '{"value": []}',
+                '{
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "object",
+                      "minProperties": 1,
+                      "maxProperties": 2
+                    }
+                  }
+                }'
+            ),
         );
     }
 }
